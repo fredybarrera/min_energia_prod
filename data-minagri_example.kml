@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+  <Document>
+    <name>SIDCO</name>
+    <description>Actualizado al 29-abr-2020 21:40</description>
+    <open>1</open>
+    <Schema name="sidco" id="sidco_schema">
+      <SimpleField type="string" name="ID">
+        <displayName>ID</displayName>
+      </SimpleField>
+    </Schema>
+      <Style id="LINEA">
+        <LineStyle>
+          <color>efbbbbbb</color>
+          <width>2</width>
+        </LineStyle>
+      </Style>
+      <Style id="LINEA-INCENDIO">
+        <LineStyle>
+          <color>ef00ADF1</color>
+          <width>2</width>
+        </LineStyle>
+      </Style>
+      <Style id="QUEMA-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/quema.png?v=20200408</href>
+          </Icon>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="QUEMA-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/quema.png?v=20200408</href>
+          </Icon>
+          <scale>1.3</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="QUEMA">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#QUEMA-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#QUEMA-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-10-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/foco.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-10-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/foco.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-10">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-10-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-10-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-20-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_trayecto.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-20-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_trayecto.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-20">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-20-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-20-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-30-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_observacion.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-30-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_observacion.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-30">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-30-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-30-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-40-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_combate.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-40-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_combate.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-40">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-40-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-40-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-50-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_controlado.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-50-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_controlado.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-50">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-50-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-50-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-60-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_liquidacion.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-60-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_liquidacion.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-60">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-60-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-60-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-90-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_extinguido.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-90-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_extinguido.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-90">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-90-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-90-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-EMPRESA-10-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/foco_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-EMPRESA-10-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/foco_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-EMPRESA-10">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-EMPRESA-10-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-EMPRESA-10-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-EMPRESA-20-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_trayecto_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-EMPRESA-20-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_trayecto_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-EMPRESA-20">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-EMPRESA-20-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-EMPRESA-20-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-EMPRESA-30-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_observacion_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-EMPRESA-30-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_observacion_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-EMPRESA-30">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-EMPRESA-30-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-EMPRESA-30-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-EMPRESA-40-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_combate_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-EMPRESA-40-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_combate_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-EMPRESA-40">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-EMPRESA-40-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-EMPRESA-40-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-EMPRESA-50-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_controlado_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-EMPRESA-50-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_controlado_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-EMPRESA-50">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-EMPRESA-50-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-EMPRESA-50-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-EMPRESA-60-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_liquidacion_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-EMPRESA-60-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_liquidacion_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-EMPRESA-60">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-EMPRESA-60-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-EMPRESA-60-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Style id="INCENDIO-EMPRESA-90-N">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_extinguido_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.5</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>00ffffff</color>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <Style id="INCENDIO-EMPRESA-90-H">
+        <IconStyle>
+          <Icon>
+            <href>http://sidco.conaf.cl/template/default/images/mapa/inc_extinguido_e.png?v=20200408</href>
+          </Icon>
+          <scale>1.6</scale>
+        </IconStyle>
+        <LabelStyle>
+          <color>ff00d0fc</color>
+          <scale>1</scale>
+        </LabelStyle>
+        <BalloonStyle>
+          <text>&lt;iframe src="http://sidco.conaf.cl/mapa/popup.php?id=$[sidco/ID]&amp;key=mEiNnE2k18" style="border: 0 solid #FFF; width: 260px; height: 230px"&gt;&lt;/iframe&gt;</text>
+        </BalloonStyle>
+      </Style>
+      <StyleMap id="INCENDIO-EMPRESA-90">
+          <Pair>
+            <key>normal</key>
+            <styleUrl>#INCENDIO-EMPRESA-90-N</styleUrl>
+          </Pair>
+          <Pair>
+            <key>highlight</key>
+            <styleUrl>#INCENDIO-EMPRESA-90-H</styleUrl>
+          </Pair>
+      </StyleMap>
+      <Folder>
+        <name>Incendio</name>
+        <open>1</open>
+          <Placemark>
+            <name>588 - LOS PARRONES</name>
+            <styleUrl>#INCENDIO-40</styleUrl>
+            <ExtendedData>
+              <SchemaData schemaUrl="#sidco_schema">
+                <SimpleData name="ID">incendio-290085823</SimpleData>
+              </SchemaData>
+            </ExtendedData>
+            <Point>
+              <coordinates>-71.304174,-32.937918,0</coordinates>
+            </Point>
+          </Placemark>
+          <Placemark>
+            <name>679 - QUINTA VERGARA</name>
+            <styleUrl>#INCENDIO-54</styleUrl>
+            <ExtendedData>
+              <SchemaData schemaUrl="#sidco_schema">
+                <SimpleData name="ID">incendio-321045800</SimpleData>
+              </SchemaData>
+            </ExtendedData>
+            <Point>
+              <coordinates>-71.553650,-33.029578,0</coordinates>
+            </Point>
+          </Placemark>
+      </Folder>
+  </Document>
+</kml>

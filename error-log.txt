@@ -1,0 +1,130 @@
+2020-09-13 01:19:50 -- Failed get_data_variable (Traceback (most recent call last):
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+TimeoutError: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\http\client.py", line 1254, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\http\client.py", line 1300, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\http\client.py", line 1249, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\http\client.py", line 1036, in _send_output
+    self.send(msg)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\http\client.py", line 974, in send
+    self.connect()
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000002FC937CF8>: Failed to establish a new connection: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='agromet.inia.cl', port=80): Max retries exceeded with url: /api/muestras/?idEmaVariable=644&desde=2020-09-13&hasta=2020-09-13&desde_hora=0059&hasta_hora=0059&user=9532d75b835b8074ff3407fd701bd9ba1e8d292d (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000002FC937CF8>: Failed to establish a new connection: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\script\min_energia\mainAgromet.py", line 170, in get_data_variable
+    response = requests.get(url)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\requests\api.py", line 75, in get
+    return request('get', url, params=params, **kwargs)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='agromet.inia.cl', port=80): Max retries exceeded with url: /api/muestras/?idEmaVariable=644&desde=2020-09-13&hasta=2020-09-13&desde_hora=0059&hasta_hora=0059&user=9532d75b835b8074ff3407fd701bd9ba1e8d292d (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000002FC937CF8>: Failed to establish a new connection: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond',))
+)
+2020-09-13 01:20:11 -- Failed get_data_variable (Traceback (most recent call last):
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\util\connection.py", line 80, in create_connection
+    raise err
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\util\connection.py", line 70, in create_connection
+    sock.connect(sa)
+TimeoutError: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\http\client.py", line 1254, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\http\client.py", line 1300, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\http\client.py", line 1249, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\http\client.py", line 1036, in _send_output
+    self.send(msg)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\http\client.py", line 974, in send
+    self.connect()
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000002F4B6BA58>: Failed to establish a new connection: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\urllib3\util\retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='agromet.inia.cl', port=80): Max retries exceeded with url: /api/muestras/?idEmaVariable=649&desde=2020-09-13&hasta=2020-09-13&desde_hora=0059&hasta_hora=0059&user=9532d75b835b8074ff3407fd701bd9ba1e8d292d (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000002F4B6BA58>: Failed to establish a new connection: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\script\min_energia\mainAgromet.py", line 170, in get_data_variable
+    response = requests.get(url)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\requests\api.py", line 75, in get
+    return request('get', url, params=params, **kwargs)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\site-packages\requests\adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='agromet.inia.cl', port=80): Max retries exceeded with url: /api/muestras/?idEmaVariable=649&desde=2020-09-13&hasta=2020-09-13&desde_hora=0059&hasta_hora=0059&user=9532d75b835b8074ff3407fd701bd9ba1e8d292d (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000002F4B6BA58>: Failed to establish a new connection: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond',))
+)
+2020-09-13 01:20:20 -- Failed get_muestras (Traceback (most recent call last):
+  File "C:\script\min_energia\mainAgromet.py", line 145, in get_muestras
+    "direccion_viento": float(direccion_viento),
+TypeError: float() argument must be a string or a number, not 'NoneType'
+)
+2020-09-13 01:20:21 -- Failed obtener_variables_agromet (Traceback (most recent call last):
+  File "C:\script\min_energia\mainAgromet.py", line 109, in obtener_variables_agromet
+    for k in muestras:
+TypeError: 'NoneType' object is not iterable
+)
