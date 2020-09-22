@@ -164,14 +164,16 @@ def get_data_variable(idEmaVariable, fecha_hoy, hhmm):
         value = 0
         url = url_agromet + 'muestras/?idEmaVariable=' + str(idEmaVariable) + '&desde=' + \
             fecha_hoy + '&hasta=' + fecha_hoy + \
-            '&desde_hora=' + str(hhmm) + '&hasta_hora=' + \
-            str(hhmm) + '&user=' + userkey_agromet
-
+            '&user=' + userkey_agromet
+        
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()
             if data['muestras'] != None:
-                value = data['muestras'][0]['valor']
+                largo = len(data['muestras'])
+                if largo > 0:
+                    last = largo - 1
+                    value = data['muestras'][last]['valor']
             
         return value
 

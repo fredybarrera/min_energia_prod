@@ -36,7 +36,8 @@ arcpy.env.preserveGlobalIds = True
 capa_buffer_incendios = const.BUFFER_INCENDIOS
 # Capa estaciones meteorológicas
 capa_estaciones_meteorologicas = const.ESTACIONES_METEOROLOGICAS
-
+# Prefijo del nombre de los datos
+USER_DATOS = const.USER_DATOS
 
 def get_data_kml(url):
     """Obtiene la data desde el servicio de Conaf (KML)."""
@@ -127,7 +128,8 @@ def delete_temp_tables():
         tables = const.TABLES_SIGGRE
 
         for table in tables:
-            name = table.split("Geodatos.LGONZALEZL.")
+            name = table.split(USER_DATOS)
+            print('name: ', name)
             t = "cruce_" + name[1]
             # t = 'cruce_' + table
             # fc = os.path.join(arcpy.env.workspace, t)

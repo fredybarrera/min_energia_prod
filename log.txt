@@ -5258,3 +5258,187 @@
 2020-09-15 15:57:45 -- Tiempo de ejecución: 0:00:06
 2020-09-15 15:57:45 -- Proceso SEC finalizado 
 
+2020-09-15 17:46:20 -- Proceso Conaf iniciado
+2020-09-15 17:46:20 -- Procesando data de conaf
+2020-09-15 17:46:21 -- Se procesaron {'actualizados': 0, 'nuevos': 0, 'extinguidos': 0} incendios
+2020-09-15 17:46:21 -- Tiempo de ejecución: 0:00:01
+2020-09-15 17:46:21 -- Proceso Conaf finalizado 
+
+2020-09-15 18:03:40 -- Proceso Conaf iniciado
+2020-09-15 18:03:42 -- Procesando data de conaf local
+2020-09-15 18:03:42 -- Creando buffer
+2020-09-15 18:03:43 -- Actualizando capa de buffers
+2020-09-15 18:03:43 -- Ejecutando análisis
+2020-09-15 18:03:44 -- Obteniendo resultados de entidades afectadas
+2020-09-15 18:03:44 -- Generando alertas
+2020-09-15 18:03:44 -- Se procesaron {'actualizados': 0, 'nuevos': 2, 'extinguidos': 0} incendios
+2020-09-15 18:03:44 -- Tiempo de ejecución: 0:00:04
+2020-09-15 18:03:44 -- Proceso Conaf finalizado 
+
+2020-09-15 18:06:25 -- Proceso Conaf iniciado
+2020-09-15 18:06:26 -- Procesando data de conaf local
+2020-09-15 18:06:26 -- Creando buffer
+2020-09-15 18:06:28 -- Actualizando capa de buffers
+2020-09-15 18:06:28 -- Ejecutando análisis
+2020-09-15 18:06:30 -- Obteniendo resultados de entidades afectadas
+2020-09-15 18:06:30 -- Generando alertas
+2020-09-15 18:06:30 -- Se procesaron {'actualizados': 0, 'nuevos': 2, 'extinguidos': 0} incendios
+2020-09-15 18:06:30 -- Tiempo de ejecución: 0:00:05
+2020-09-15 18:06:30 -- Proceso Conaf finalizado 
+
+2020-09-15 18:08:02 -- Proceso Conaf iniciado
+2020-09-15 18:08:04 -- Procesando data de conaf local
+2020-09-15 18:08:04 -- Creando buffer
+2020-09-15 18:08:05 -- Actualizando capa de buffers
+2020-09-15 18:08:05 -- Ejecutando análisis
+2020-09-15 18:08:07 -- Obteniendo resultados de entidades afectadas
+2020-09-15 18:08:07 -- Generando alertas
+2020-09-15 18:08:07 -- Se procesaron {'actualizados': 0, 'nuevos': 2, 'extinguidos': 0} incendios
+2020-09-15 18:08:07 -- Tiempo de ejecución: 0:00:04
+2020-09-15 18:08:07 -- Proceso Conaf finalizado 
+
+2020-09-21 23:00:22 -- Proceso Conaf iniciado
+2020-09-21 23:00:25 -- Procesando data de conaf local
+2020-09-21 23:00:25 -- Creando buffer
+2020-09-21 23:00:26 -- Actualizando capa de buffers
+2020-09-21 23:00:26 -- Ejecutando análisis
+2020-09-21 23:00:28 -- Obteniendo resultados de entidades afectadas
+2020-09-21 23:00:29 -- Generando alertas
+2020-09-21 23:00:29 -- Se procesaron {'actualizados': 0, 'nuevos': 2, 'extinguidos': 0} incendios
+2020-09-21 23:00:29 -- Tiempo de ejecución: 0:00:06
+2020-09-21 23:00:29 -- Proceso Conaf finalizado 
+
+2020-09-21 23:07:34 -- Proceso Conaf iniciado
+2020-09-21 23:07:35 -- Procesando data de conaf local
+2020-09-21 23:07:35 -- Creando buffer
+2020-09-21 23:07:36 -- Actualizando capa de buffers
+2020-09-21 23:07:36 -- Ejecutando análisis
+2020-09-21 23:07:38 -- Obteniendo resultados de entidades afectadas
+2020-09-21 23:07:38 -- Generando alertas
+2020-09-21 23:07:38 -- Se procesaron {'actualizados': 0, 'nuevos': 2, 'extinguidos': 0} incendios
+2020-09-21 23:07:38 -- Tiempo de ejecución: 0:00:04
+2020-09-21 23:07:38 -- Proceso Conaf finalizado 
+
+2020-09-21 23:10:24 -- Proceso Conaf iniciado
+2020-09-21 23:10:25 -- Procesando data de conaf local
+2020-09-21 23:10:25 -- Creando buffer
+2020-09-21 23:10:26 -- Actualizando capa de buffers
+2020-09-21 23:10:26 -- Ejecutando análisis
+2020-09-21 23:10:28 -- Obteniendo resultados de entidades afectadas
+2020-09-21 23:10:28 -- Generando alertas
+2020-09-21 23:10:28 -- Se procesaron {'actualizados': 0, 'nuevos': 2, 'extinguidos': 0} incendios
+2020-09-21 23:10:28 -- Tiempo de ejecución: 0:00:04
+2020-09-21 23:10:28 -- Proceso Conaf finalizado 
+
+2020-09-21 23:13:44 -- Proceso Conaf iniciado
+2020-09-21 23:13:47 -- Procesando data de conaf local
+2020-09-21 23:13:47 -- Creando buffer
+2020-09-21 23:13:48 -- Actualizando capa de buffers
+2020-09-21 23:13:48 -- Ejecutando análisis
+2020-09-21 23:13:49 -- Obteniendo resultados de entidades afectadas
+2020-09-21 23:13:49 -- Generando alertas
+2020-09-21 23:13:50 -- Se procesaron {'actualizados': 0, 'nuevos': 2, 'extinguidos': 0} incendios
+2020-09-21 23:13:50 -- Tiempo de ejecución: 0:00:05
+2020-09-21 23:13:50 -- Proceso Conaf finalizado 
+
+2020-09-21 23:15:08 -- Proceso Conaf iniciado
+2020-09-21 23:15:09 -- Procesando data de conaf local
+2020-09-21 23:15:09 -- Creando buffer
+2020-09-21 23:15:10 -- Actualizando capa de buffers
+2020-09-21 23:15:10 -- Ejecutando análisis
+2020-09-21 23:15:12 -- Obteniendo resultados de entidades afectadas
+2020-09-21 23:15:12 -- Generando alertas
+2020-09-21 23:15:12 -- Se procesaron {'actualizados': 0, 'nuevos': 2, 'extinguidos': 0} incendios
+2020-09-21 23:15:12 -- Tiempo de ejecución: 0:00:04
+2020-09-21 23:15:12 -- Proceso Conaf finalizado 
+
+2020-09-21 23:18:34 -- Proceso Conaf iniciado
+2020-09-21 23:18:36 -- Procesando data de conaf local
+2020-09-21 23:18:36 -- Creando buffer
+2020-09-21 23:18:37 -- Actualizando capa de buffers
+2020-09-21 23:18:37 -- Ejecutando análisis
+2020-09-21 23:18:49 -- Obteniendo resultados de entidades afectadas
+2020-09-21 23:18:49 -- Generando alertas
+2020-09-21 23:18:53 -- Se procesaron {'actualizados': 0, 'nuevos': 2, 'extinguidos': 0} incendios
+2020-09-21 23:18:53 -- Tiempo de ejecución: 0:00:19
+2020-09-21 23:18:53 -- Proceso Conaf finalizado 
+
+2020-09-21 23:21:43 -- Proceso Agromet iniciado
+2020-09-21 23:21:43 -- Obteniendo direccion del viento
+2020-09-21 23:21:43 -- Fecha y hora consultada: 2020-09-21 - 2301 
+2020-09-21 23:23:22 -- Actualizando direccion del viento
+2020-09-21 23:23:22 -- Tiempo de ejecución: 0:01:39
+2020-09-21 23:23:22 -- Proceso Agromet finalizado 
+
+2020-09-21 23:27:48 -- Proceso Agromet iniciado
+2020-09-21 23:27:48 -- Obteniendo direccion del viento
+2020-09-21 23:27:48 -- Fecha y hora consultada: 2020-09-21 - 2307 
+2020-09-21 23:27:48 -- Actualizando direccion del viento
+2020-09-21 23:27:48 -- Tiempo de ejecución: 0:00:00
+2020-09-21 23:27:48 -- Proceso Agromet finalizado 
+
+2020-09-21 23:28:18 -- Proceso Agromet iniciado
+2020-09-21 23:28:18 -- Obteniendo direccion del viento
+2020-09-21 23:28:18 -- Fecha y hora consultada: 2020-09-21 - 2308 
+2020-09-21 23:28:19 -- Actualizando direccion del viento
+2020-09-21 23:28:19 -- Tiempo de ejecución: 0:00:00
+2020-09-21 23:28:19 -- Proceso Agromet finalizado 
+
+2020-09-21 23:29:34 -- Proceso Agromet iniciado
+2020-09-21 23:29:34 -- Obteniendo direccion del viento
+2020-09-21 23:29:34 -- Fecha y hora consultada: 2020-09-21 - 2309 
+2020-09-21 23:29:34 -- Actualizando direccion del viento
+2020-09-21 23:29:34 -- Tiempo de ejecución: 0:00:00
+2020-09-21 23:29:34 -- Proceso Agromet finalizado 
+
+2020-09-21 23:31:02 -- Proceso Agromet iniciado
+2020-09-21 23:31:02 -- Obteniendo direccion del viento
+2020-09-21 23:31:02 -- Fecha y hora consultada: 2020-09-21 - 2311 
+2020-09-21 23:31:02 -- Actualizando direccion del viento
+2020-09-21 23:31:02 -- Tiempo de ejecución: 0:00:00
+2020-09-21 23:31:02 -- Proceso Agromet finalizado 
+
+2020-09-21 23:31:57 -- Proceso Agromet iniciado
+2020-09-21 23:31:57 -- Obteniendo direccion del viento
+2020-09-21 23:31:57 -- Fecha y hora consultada: 2020-09-21 - 2311 
+2020-09-21 23:31:57 -- Actualizando direccion del viento
+2020-09-21 23:31:57 -- Tiempo de ejecución: 0:00:00
+2020-09-21 23:31:57 -- Proceso Agromet finalizado 
+
+2020-09-21 23:32:23 -- Proceso Agromet iniciado
+2020-09-21 23:32:23 -- Obteniendo direccion del viento
+2020-09-21 23:32:23 -- Fecha y hora consultada: 2020-09-21 - 2312 
+2020-09-21 23:32:24 -- Actualizando direccion del viento
+2020-09-21 23:32:24 -- Tiempo de ejecución: 0:00:00
+2020-09-21 23:32:24 -- Proceso Agromet finalizado 
+
+2020-09-21 23:35:10 -- Proceso Agromet iniciado
+2020-09-21 23:35:10 -- Obteniendo direccion del viento
+2020-09-21 23:35:10 -- Fecha y hora consultada: 2020-09-21 - 2315 
+2020-09-21 23:36:31 -- Actualizando direccion del viento
+2020-09-21 23:36:31 -- Tiempo de ejecución: 0:01:21
+2020-09-21 23:36:31 -- Proceso Agromet finalizado 
+
+2020-09-21 23:40:17 -- Proceso Conaf iniciado
+2020-09-21 23:40:17 -- Procesando data de conaf
+2020-09-21 23:48:28 -- Proceso Conaf iniciado
+2020-09-21 23:48:28 -- Procesando data de conaf
+2020-09-21 23:48:40 -- Proceso Conaf iniciado
+2020-09-21 23:48:42 -- Procesando data de conaf local
+2020-09-21 23:48:42 -- Creando buffer
+2020-09-21 23:48:42 -- Actualizando capa de buffers
+2020-09-21 23:48:43 -- Ejecutando análisis
+2020-09-21 23:48:54 -- Obteniendo resultados de entidades afectadas
+2020-09-21 23:48:54 -- Generando alertas
+2020-09-21 23:48:58 -- Se procesaron {'actualizados': 0, 'nuevos': 2, 'extinguidos': 0} incendios
+2020-09-21 23:48:58 -- Tiempo de ejecución: 0:00:17
+2020-09-21 23:48:58 -- Proceso Conaf finalizado 
+
+2020-09-21 23:49:59 -- Proceso SEC iniciado
+2020-09-21 23:49:59 -- Obteniendo clientes afectados
+2020-09-21 23:49:59 -- Limpiando resultados anteriores
+2020-09-21 23:49:59 -- Actualizando clientes afectados
+2020-09-21 23:49:59 -- Se registraron 1887 afectados
+2020-09-21 23:49:59 -- Tiempo de ejecución: 0:00:00
+2020-09-21 23:49:59 -- Proceso SEC finalizado 
+

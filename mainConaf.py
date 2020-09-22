@@ -66,6 +66,7 @@ capa_buffer_incendios = const.BUFFER_INCENDIOS
 # Capa de lectura de incendios de AGOL
 capa_buffer_incendios_visor = const.BUFFER_VISOR
 
+user_datos = const.USER_DATOS
 
 def main():
     """Main function Conaf."""
@@ -97,10 +98,11 @@ def main():
 
     # Si no existen incendios, limpio todas las capas
     if (incendios['actualizados'] == 0 and incendios['nuevos'] == 0 and incendios['extinguidos'] == 0):
-        utils.truncar_data_dataset(capa_incendios)
-        utils.truncar_data_dataset(capa_puntos_afectados)
-        utils.truncar_data_dataset(capa_lineas_afectadas)
-        utils.truncar_data_dataset(capa_buffer_incendios_visor)
+        # utils.truncar_data_dataset(capa_incendios)
+        # utils.truncar_data_dataset(capa_puntos_afectados)
+        # utils.truncar_data_dataset(capa_lineas_afectadas)
+        # utils.truncar_data_dataset(capa_buffer_incendios_visor)
+        return True
 
     # Si existen incendios nuevos, creo los buffer a cada uno de ellos, ejecuto el análisis y actualizo las capas
     # Si hay actualizacion de algun incendio, actualizo el estado del servicio de incendios, buffer y capas de resultados
@@ -447,7 +449,7 @@ def ejecutar_analisis(buffer):
                 in_buffer = os.path.join(arcpy.env.workspace, dataset, buffer)
                 in_feature = os.path.join(arcpy.env.workspace, dataset_ministerio, f)
                 inFeatures = [in_buffer, in_feature]
-                name = f.split("Geodatos.LGONZALEZL.")
+                name = f.split(user_datos)
                 capa_cruce = "cruce_" + name[1]
                 arcpy.AddMessage("Intersectando buffer contra " + f + " ...")
                 arcpy.AddMessage("nombre capa_cruce: " + capa_cruce + " ...")
@@ -498,7 +500,7 @@ def actualizar_resultados_local_lineas():
 
         data = []
         for f in features:
-            name = f.split("Geodatos.LGONZALEZL.")
+            name = f.split(user_datos)
             feature = "cruce_" + name[1]
             # print('feature: ', feature)
             if feature in incluir:
@@ -573,7 +575,7 @@ def actualizar_resultados_local_puntos():
 
         data = []
         for f in features:
-            name = f.split("Geodatos.LGONZALEZL.")
+            name = f.split(user_datos)
             feature = "cruce_" + name[1]
             # print('feature: ', feature)
             if feature in incluir:

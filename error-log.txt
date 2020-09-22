@@ -128,3 +128,120 @@ TypeError: float() argument must be a string or a number, not 'NoneType'
     for k in muestras:
 TypeError: 'NoneType' object is not iterable
 )
+2020-09-15 18:03:44 -- Failed actualizar_resultados_local_lineas (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainConaf.py", line 502, in actualizar_resultados_local_lineas
+    feature = "cruce_" + name[1]
+IndexError: list index out of range
+)
+2020-09-15 18:03:44 -- Failed actualizar_resultados_local_puntos (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainConaf.py", line 577, in actualizar_resultados_local_puntos
+    feature = "cruce_" + name[1]
+IndexError: list index out of range
+)
+2020-09-15 18:06:30 -- Failed actualizar_resultados_local_lineas (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainConaf.py", line 503, in actualizar_resultados_local_lineas
+    name = f.split(user_datos)
+ValueError: empty separator
+)
+2020-09-15 18:06:30 -- Failed actualizar_resultados_local_puntos (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainConaf.py", line 578, in actualizar_resultados_local_puntos
+    name = f.split(user_datos)
+ValueError: empty separator
+)
+2020-09-15 18:08:07 -- Failed actualizar_resultados_local_lineas (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainConaf.py", line 503, in actualizar_resultados_local_lineas
+    name = f.split(user_datos)
+ValueError: empty separator
+)
+2020-09-15 18:08:07 -- Failed actualizar_resultados_local_puntos (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainConaf.py", line 578, in actualizar_resultados_local_puntos
+    name = f.split(user_datos)
+ValueError: empty separator
+)
+2020-09-21 23:00:28 -- Failed actualizar_resultados_local_lineas (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainConaf.py", line 503, in actualizar_resultados_local_lineas
+    name = f.split(user_datos)
+ValueError: empty separator
+)
+2020-09-21 23:00:28 -- Failed actualizar_resultados_local_puntos (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainConaf.py", line 578, in actualizar_resultados_local_puntos
+    name = f.split(user_datos)
+ValueError: empty separator
+)
+2020-09-21 23:27:48 -- Failed get_muestras (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainAgromet.py", line 138, in get_muestras
+    exit()
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\_sitebuiltins.py", line 26, in __call__
+    raise SystemExit(code)
+SystemExit: None
+)
+2020-09-21 23:27:48 -- Failed obtener_variables_agromet (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainAgromet.py", line 109, in obtener_variables_agromet
+    for k in muestras:
+TypeError: 'NoneType' object is not iterable
+)
+2020-09-21 23:28:18 -- Failed get_muestras (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainAgromet.py", line 138, in get_muestras
+    exit()
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\_sitebuiltins.py", line 26, in __call__
+    raise SystemExit(code)
+SystemExit: None
+)
+2020-09-21 23:28:19 -- Failed obtener_variables_agromet (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainAgromet.py", line 109, in obtener_variables_agromet
+    for k in muestras:
+TypeError: 'NoneType' object is not iterable
+)
+2020-09-21 23:29:34 -- Failed get_muestras (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainAgromet.py", line 138, in get_muestras
+    exit()
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\_sitebuiltins.py", line 26, in __call__
+    raise SystemExit(code)
+SystemExit: None
+)
+2020-09-21 23:29:34 -- Failed obtener_variables_agromet (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainAgromet.py", line 109, in obtener_variables_agromet
+    for k in muestras:
+TypeError: 'NoneType' object is not iterable
+)
+2020-09-21 23:31:02 -- Failed get_data_variable (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainAgromet.py", line 177, in get_data_variable
+    print('len: ', len(data['muestras']))
+UnboundLocalError: local variable 'len' referenced before assignment
+)
+2020-09-21 23:31:02 -- Failed get_muestras (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainAgromet.py", line 138, in get_muestras
+    exit()
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\_sitebuiltins.py", line 26, in __call__
+    raise SystemExit(code)
+SystemExit: None
+)
+2020-09-21 23:31:02 -- Failed obtener_variables_agromet (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainAgromet.py", line 109, in obtener_variables_agromet
+    for k in muestras:
+TypeError: 'NoneType' object is not iterable
+)
+2020-09-21 23:31:57 -- Failed get_muestras (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainAgromet.py", line 138, in get_muestras
+    exit()
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\_sitebuiltins.py", line 26, in __call__
+    raise SystemExit(code)
+SystemExit: None
+)
+2020-09-21 23:31:57 -- Failed obtener_variables_agromet (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainAgromet.py", line 109, in obtener_variables_agromet
+    for k in muestras:
+TypeError: 'NoneType' object is not iterable
+)
+2020-09-21 23:32:24 -- Failed get_muestras (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainAgromet.py", line 138, in get_muestras
+    exit()
+  File "C:\ProgramData\Miniconda3\envs\arcgispro-py3\lib\_sitebuiltins.py", line 26, in __call__
+    raise SystemExit(code)
+SystemExit: None
+)
+2020-09-21 23:32:24 -- Failed obtener_variables_agromet (Traceback (most recent call last):
+  File "c:/Proyectos/Siggre/script_produccion/min_energia/mainAgromet.py", line 109, in obtener_variables_agromet
+    for k in muestras:
+TypeError: 'NoneType' object is not iterable
+)

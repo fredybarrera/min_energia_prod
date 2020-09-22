@@ -17,6 +17,8 @@ WORKSPACE = config('FOLDER_WORKSPACE')
 WORKSPACE_LOCAL = config('FOLDER_WORKSPACE_LOCAL')
 DATASET = config('WORKSPACE_DATASET')
 DATASET_MINISTERIO = config('WORKSPACE_DATASET_CAPAS_MINISTERIO')
+USER_DATOS = config('USER_GEODATOS')
+USER_DATOS_SCRIPT = config('USER_GEODATOS_SCRIPT')
 # **********************************************************************************************
 
 # **********************************************************************************************
@@ -41,35 +43,35 @@ URL_API_SEC = "https://apps.sec.cl/IntEnLineaBetaV50/ClientesAfectados/GetPorFec
 # **********************************************************************************************
 # **********************************************************************************************
 
-INCENDIOS = "Geodatos.USR_SCRIPT.INCENDIOS_CONAF"
+INCENDIOS = USER_DATOS_SCRIPT + "INCENDIOS_CONAF"
 # Capa con puntos afectados
-PUNTOS_AFECTADOS = "Geodatos.USR_SCRIPT.PUNTOS_AFECTADOS"
+PUNTOS_AFECTADOS = USER_DATOS_SCRIPT + "PUNTOS_AFECTADOS"
 # Capa con lineas afectadas
-LINEAS_AFECTADAS = "Geodatos.USR_SCRIPT.LINEAS_AFECTADAS"
+LINEAS_AFECTADAS = USER_DATOS_SCRIPT + "LINEAS_AFECTADAS"
 # Capa de salida del buffer por cada incendio
 BUFFER_INCENDIOS = 'output_buffer'
 # Capa de lectura de incendios de AGOL
-BUFFER_VISOR = 'Geodatos.USR_SCRIPT.output_buffer_visor'
+BUFFER_VISOR = USER_DATOS_SCRIPT + 'output_buffer_visor'
 # Estaciones meteorológicas
-ESTACIONES_METEOROLOGICAS = "Geodatos.USR_SCRIPT.ESTACIONES_METEOROLOGICAS"
+ESTACIONES_METEOROLOGICAS = USER_DATOS_SCRIPT + "ESTACIONES_METEOROLOGICAS"
 # Capa comunas
-COMUNAS_SEC = "Geodatos.USR_SCRIPT.BASE_COMUNA_SEC"
+COMUNAS_SEC = USER_DATOS_SCRIPT + "BASE_COMUNA_SEC"
 
 
 # Tables siggre
 TABLES_SIGGRE = [
-    'Geodatos.LGONZALEZL.IE_GENERACION', 
-    'Geodatos.LGONZALEZL.IE_TAP_OFF', 
-    'Geodatos.LGONZALEZL.IE_CONCESION_ELECTRICA', 
-    'Geodatos.LGONZALEZL.IE_LINEA_DE_TRANSMISION', 
-    'Geodatos.LGONZALEZL.IE_SUBESTACION', 
-    'Geodatos.LGONZALEZL.IE_ALIMENTADOR'
-    'Geodatos.LGONZALEZL.IHC_OLEODUCTO', 
-    'Geodatos.LGONZALEZL.IHC_GASODUCTO', 
-    'Geodatos.LGONZALEZL.IHC_TERMINAL_MARITIMO', 
-    'Geodatos.LGONZALEZL.IHC_ALMACENAMIENTO_DE_COMBUSTIBLE', 
-    'Geodatos.LGONZALEZL.IHC_PLANTA_SATELITE_DE_REGASIFICACION', 
-    'Geodatos.LGONZALEZL.IHC_ESTACION_DE_SERVICIO'
+    '{0}IE_GENERACION'.format(USER_DATOS), 
+    '{0}IE_TAP_OFF'.format(USER_DATOS), 
+    '{0}IE_CONCESION_ELECTRICA'.format(USER_DATOS), 
+    '{0}IE_LINEA_DE_TRANSMISION'.format(USER_DATOS), 
+    '{0}IE_SUBESTACION'.format(USER_DATOS), 
+    '{0}IE_ALIMENTADOR'.format(USER_DATOS), 
+    '{0}IHC_OLEODUCTO'.format(USER_DATOS), 
+    '{0}IHC_GASODUCTO'.format(USER_DATOS), 
+    '{0}IHC_TERMINAL_MARITIMO'.format(USER_DATOS), 
+    '{0}IHC_ALMACENAMIENTO_DE_COMBUSTIBLE'.format(USER_DATOS), 
+    '{0}IHC_PLANTA_SATELITE_DE_REGASIFICACION'.format(USER_DATOS), 
+    '{0}IHC_ESTACION_DE_SERVICIO'.format(USER_DATOS), 
 ]
 
 LINE_TABLES = [
