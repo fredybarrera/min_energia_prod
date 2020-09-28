@@ -97,12 +97,12 @@ def main():
     
 
     # Si no existen incendios, limpio todas las capas
-    if (incendios['actualizados'] == 0 and incendios['nuevos'] == 0 and incendios['extinguidos'] == 0):
+    # if (incendios['actualizados'] == 0 and incendios['nuevos'] == 0 and incendios['extinguidos'] == 0):
         # utils.truncar_data_dataset(capa_incendios)
         # utils.truncar_data_dataset(capa_puntos_afectados)
         # utils.truncar_data_dataset(capa_lineas_afectadas)
         # utils.truncar_data_dataset(capa_buffer_incendios_visor)
-        return True
+        # return True
 
     # Si existen incendios nuevos, creo los buffer a cada uno de ellos, ejecuto el análisis y actualizo las capas
     # Si hay actualizacion de algun incendio, actualizo el estado del servicio de incendios, buffer y capas de resultados
@@ -483,7 +483,7 @@ def actualizar_resultados_local_lineas():
             'E_MAIL',
             'NOM_EMP_AN',
             'NOMBRE_ALI',
-            'SHAPE@JSON',
+            'SHAPE@',
             'id_incendio',
             'nombre_incendio',
             'comuna_incendio',
@@ -510,15 +510,15 @@ def actualizar_resultados_local_lineas():
                     # print('fccccccc: ', fc)
                     print('actualizar_resultados_local_lineas fc: ', fc)
                     field_names = [f.name for f in arcpy.ListFields(fc)]
-                    field_names.append('SHAPE@JSON')
+                    field_names.append('SHAPE@')
                     with arcpy.da.SearchCursor(fc, field_names) as cursor:
                         for row in cursor:
                             union = list(zip(field_names, row))
                             attributes = {}
                             for val in union:
                                 if val[0] in posiblesColumnas:
-                                    if val[0] == 'SHAPE@JSON':
-                                        attributes['shape'] = json.loads(val[1])
+                                    if val[0] == 'SHAPE@':
+                                        attributes['shape'] = val[1]
                                         continue
                                     if (val[0] == 'NOMBRE_ALI'):
                                         attributes['nombre'] = val[1]
@@ -638,18 +638,21 @@ def insert_data_local(capa_local, datos, es_punto=None):
         ]
         fc = os.path.join(arcpy.env.workspace, dataset, capa_local)
         cursor = arcpy.da.InsertCursor(fc, fields)
-
+        out_sr = arcpy.SpatialReference("WGS 1984")
         for dato in datos:
             if es_punto != None:
                 point = arcpy.Point(float(dato['longitud']), float(dato['latitud']))
-                out_sr = arcpy.SpatialReference("WGS 1984")
                 geometry = arcpy.PointGeometry(point, out_sr)
             else:
-                array = arcpy.Array()
-                for feature in dato['shape']['paths'][0]:
-                    array.add(arcpy.Point(feature[0], feature[1]))
-                out_sr = arcpy.SpatialReference("WGS 1984")
-                geometry = arcpy.Polyline(array, out_sr)
+
+                # for feature in dato['shape']['paths']:
+                # #     # Create a Polyline object based on the array of points
+                # #     # Append to the list of Polyline objects
+                #     # geometry = arcpy.Polyline(arcpy.Array([arcpy.Point(*coords) for coords in feature]))
+
+                #     array = arcpy.Array([arcpy.Point(*coords) for coords in feature])
+                
+                geometry = dato['shape']
 
             cursor.insertRow((
                 dato['leyenda'],
@@ -865,16 +868,17 @@ def generar_alertas(entidades):
 
                 # Para el caso de las empresas, agrupo la data por email
                 data_por_correo = agrupar_por_correo(data_por_incendio[incendio]['instalaciones'])
-                for correo in data_por_correo:
+                if bool(data_por_correo):
+                    for correo in data_por_correo:
 
-                    # Por cada correo registrado, envío una alerta con todas las instalaciones afectadas.
-                    utils.enviar_correo_empresa(
-                        correo,
-                        id_incendio,
-                        comuna_incendio,
-                        superficie,
-                        data_por_correo[correo]['instalaciones']
-                    )
+                        # Por cada correo registrado, envío una alerta con todas las instalaciones afectadas.
+                        utils.enviar_correo_empresa(
+                            correo,
+                            id_incendio,
+                            comuna_incendio,
+                            superficie,
+                            data_por_correo[correo]['instalaciones']
+                        )
 
     except:
         print("Failed generar_alertas (%s)" %

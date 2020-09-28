@@ -45,8 +45,10 @@ def get_data_kml(url):
         data = et.ElementTree(file=ur.urlopen(url))
         return data
     except:
-        print("Failed load kml data (%s)" %
+        print("Failed get_data_kml (%s)" %
               traceback.format_exc())
+        utils.error_log("Failed get_data_kml (%s)" %
+                        traceback.format_exc())
 
 
 def post_request_json_raw_data(url, raw_data):
@@ -60,6 +62,8 @@ def post_request_json_raw_data(url, raw_data):
     except:
         print("Failed post_request_payload (%s)" %
               traceback.format_exc())
+        utils.error_log("Failed post_request_payload (%s)" %
+                        traceback.format_exc())
 
 
 def get_data_iframe(id_incendio):
@@ -94,6 +98,8 @@ def get_data_iframe(id_incendio):
 
     except:
         print("Failed get_data_iframe (%s)" % traceback.format_exc())
+        utils.error_log("Failed get_data_iframe (%s)" %
+                        traceback.format_exc())
 
 
 def get_data_iframe_aux(id_incendio):
@@ -120,6 +126,8 @@ def truncar_data_dataset(table):
 
     except:
         print("Failed truncar_data_dataset (%s)" % traceback.format_exc())
+        utils.error_log("Failed truncar_data_dataset (%s)" %
+                        traceback.format_exc())
 
 
 def delete_temp_tables():
@@ -149,6 +157,8 @@ def delete_temp_tables():
                 
     except:
         print("Failed delete_temp_tables (%s)" % traceback.format_exc())
+        utils.error_log("Failed delete_temp_tables (%s)" %
+                        traceback.format_exc())
 
 
 def enviar_correo_empresa(destinatario, id_incendio, comuna_incendio, superficie, instalaciones):
@@ -188,6 +198,8 @@ def enviar_correo_empresa(destinatario, id_incendio, comuna_incendio, superficie
 
     except:
         print("Failed enviar_correo_empresa (%s)" % traceback.format_exc())
+        utils.error_log("Failed enviar_correo_empresa (%s)" %
+                        traceback.format_exc())
 
 
 def enviar_correo_admin(id_incendio, comuna_incendio, superficie, instalaciones):
@@ -232,6 +244,8 @@ def enviar_correo_admin(id_incendio, comuna_incendio, superficie, instalaciones)
 
     except:
         print("Failed enviar_correo_admin (%s)" % traceback.format_exc())
+        utils.error_log("Failed enviar_correo_admin (%s)" %
+                        traceback.format_exc())
 
 
 def enviar_correo_admin_extinguido(id_incendio, fecha_inicio_incendio, comuna_incendio):
@@ -248,6 +262,8 @@ def enviar_correo_admin_extinguido(id_incendio, fecha_inicio_incendio, comuna_in
 
     except:
         print("Failed enviar_correo_admin_extinguido (%s)" % traceback.format_exc())
+        utils.error_log("Failed enviar_correo_admin_extinguido (%s)" %
+                        traceback.format_exc())
 
 
 def convert_seconds(seconds):
@@ -317,6 +333,8 @@ def actualizar_agromet():
 
     except:
         print("Failed actualizar_agromet (%s)" % traceback.format_exc())
+        utils.error_log("Failed actualizar_agromet (%s)" %
+                        traceback.format_exc())
 
 
 def log(text):
@@ -329,6 +347,8 @@ def log(text):
     except:
         print("Failed log (%s)" %
               traceback.format_exc())
+        utils.error_log("Failed send (%s)" %
+                        traceback.format_exc())
 
 
 def error_log(text):

@@ -14,6 +14,7 @@ from email.mime.multipart import MIMEMultipart
 from decouple import config
 import template_html as template
 import traceback
+import utils
 
 #-------------------------------------------------------------------------------
 # Configuracion correo
@@ -50,6 +51,8 @@ def enviar_email_empresa(destinatario, subject, texto_instalaciones):
     except:
         print("Failed enviar_email_empresa (%s)" %
               traceback.format_exc())
+        utils.error_log("Failed enviar_email_empresa (%s)" %
+                        traceback.format_exc())
 
 
 # Envío alerta de correo con el resumen del incendio al administrador del sistema
@@ -72,6 +75,8 @@ def enviar_email_admin(id_incendio, comuna_incendio, superficie, subject, texto_
     except:
         print("Failed enviar_email_admin (%s)" %
               traceback.format_exc())
+        utils.error_log("Failed enviar_email_admin (%s)" %
+                        traceback.format_exc())
 
 
 # Envío alerta de correo al administrador del sistema informado que el incendio está extinguido.
@@ -94,6 +99,8 @@ def enviar_email_admin_extinguido(id_incendio, comuna_incendio, subject, fecha_i
     except:
         print("Failed enviar_email_admin_extinguido (%s)" %
               traceback.format_exc())
+        utils.error_log("Failed enviar_email_admin_extinguido (%s)" %
+                        traceback.format_exc())
 
 
 # Envio el correo
@@ -108,3 +115,5 @@ def send(to, message):
             server.quit()
     except:
         print("Failed send (%s)" % traceback.format_exc())
+        utils.error_log("Failed send (%s)" %
+                        traceback.format_exc())

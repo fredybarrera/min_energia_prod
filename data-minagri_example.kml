@@ -609,7 +609,7 @@
         <name>Incendio</name>
         <open>1</open>
           <Placemark>
-            <name>588 - LOS PARRONES</name>
+            <name>588 - Nuevooo</name>
             <styleUrl>#INCENDIO-40</styleUrl>
             <ExtendedData>
               <SchemaData schemaUrl="#sidco_schema">
@@ -617,7 +617,7 @@
               </SchemaData>
             </ExtendedData>
             <Point>
-              <coordinates>-71.304174,-32.937918,0</coordinates>
+              <coordinates>-71.9084921,-35.7312511,0</coordinates>
             </Point>
           </Placemark>
           <Placemark>
