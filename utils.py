@@ -338,6 +338,7 @@ def actualizar_agromet():
 
 
 def log(text):
+    """Registra un log de proceso. """
     try:
         log_file = os.path.join(script_dir, 'log.txt')
         f = open(log_file, "a", encoding='utf-8')
@@ -352,11 +353,13 @@ def log(text):
 
 
 def error_log(text):
+    """Registra un log de error. """
     try:
         log_file = os.path.join(script_dir, 'error-log.txt')
         f = open(log_file, "a")
         f.write(
             "{0} -- {1}\n".format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"), text))
+        f.write("---------------------------------------------------------------- \n")
         f.close()
     except:
         print("Failed error_log (%s)" %
