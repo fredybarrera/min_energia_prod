@@ -96,13 +96,15 @@ def main():
         incendios = procesar_data_conaf_rest(data_conaf)
     
 
-    # Si no existen incendios, limpio todas las capas
+    # Si no existen incendios activos en el servicio de conaf, limpio todas las capas
+    if (incendios['incendios_activos'] == 0):
     # if (incendios['actualizados'] == 0 and incendios['nuevos'] == 0 and incendios['extinguidos'] == 0):
-        # utils.truncar_data_dataset(capa_incendios)
-        # utils.truncar_data_dataset(capa_puntos_afectados)
-        # utils.truncar_data_dataset(capa_lineas_afectadas)
-        # utils.truncar_data_dataset(capa_buffer_incendios_visor)
-        # return True
+        informar_incendios_extinguidos()
+        utils.truncar_data_dataset(capa_incendios)
+        utils.truncar_data_dataset(capa_puntos_afectados)
+        utils.truncar_data_dataset(capa_lineas_afectadas)
+        utils.truncar_data_dataset(capa_buffer_incendios_visor)
+
 
     # Si existen incendios nuevos, creo los buffer a cada uno de ellos, ejecuto el análisis y actualizo las capas
     # Si hay actualizacion de algun incendio, actualizo el estado del servicio de incendios, buffer y capas de resultados
@@ -111,6 +113,8 @@ def main():
        # Creo el buffer a los incendios (sobreescribe el existente)
         crear_buffer(capa_incendios)
 
+        # Borro los buffers creados con anterioridad
+        utils.truncar_data_dataset(capa_buffer_incendios_visor)
         # Una vez creado el buffer, copio los datos en capa_buffer_incendios_visor
         copiar_datos_buffer(capa_buffer_incendios, capa_buffer_incendios_visor)
 
@@ -154,6 +158,24 @@ def main():
     utils.log("Proceso Conaf finalizado \n")
 
 
+def informar_incendios_extinguidos():
+    """Informa al admin que el incendio se ha extinguido, cuando no existe ningún incendio registrado por conaf."""
+    try:
+        arcpy.AddMessage("Enviando alerta de incendio extinguido...")
+        fc = os.path.join(arcpy.env.workspace, dataset, capa_incendios)
+        with arcpy.da.SearchCursor(fc, ["id_incendio", "fecha_inicio_incendio", "comuna_incendio"]) as cursor:
+            for row in cursor:
+                # Envío la alerta
+                utils.log("Informando incendio extingido id: {0}, comuna de {1}, fecha: {3}".format(row[0], row[2], row[1]))
+                utils.enviar_correo_admin_extinguido(row[0], row[1], row[2])
+        del cursor
+
+    except:
+        print("Failed informar_incendios_extinguidos (%s)" % traceback.format_exc())
+        utils.error_log("Failed informar_incendios_extinguidos (%s)" %
+                        traceback.format_exc())
+
+
 def procesar_data_conaf_rest(data):
     """
     Procesa la data obtenida desde el servicio de conaf y actualiza la capa de incendios de conaf
@@ -167,6 +189,8 @@ def procesar_data_conaf_rest(data):
         incendios_nuevos = 0
         incendios_actualizados = 0
         incendios_extinguidos = 0
+        incendios_activos = 0
+        indendios_servicio = []
 
         fields = [
             'id_incendio', 
@@ -186,8 +210,13 @@ def procesar_data_conaf_rest(data):
             incendio = pm.find('{0}name'.format(nmsp_conaf)).text  # Nombre del incendio
             
             id_incendio = pm.find('{0}ExtendedData/{0}SchemaData/{0}SimpleData'.format(nmsp_conaf)).text  # Id del incendio
+            indendios_servicio.append(id_incendio)
 
             for ls in pm.iterfind('{0}Point/{0}coordinates'.format(nmsp_conaf)):
+
+                # print('hay incendios activos en el servicio de conaf -------------------------------------')
+
+                incendios_activos += 1
 
                 coordinates = ls.text.strip().replace(',0', '')
                 res = coordinates.split(',')
@@ -212,13 +241,45 @@ def procesar_data_conaf_rest(data):
                             if estado_incendio_servicio == 'Extinguido':
                                 incendios_extinguidos += 1
                                 utils.enviar_correo_admin_extinguido(id_incendio, fecha_inicio_incendio, comuna)
-                            with arcpy.da.UpdateCursor(fc, ['id_incendio', 'estado_incendio']) as cursor_update:
-                                for row_u in cursor_update:
-                                    if row_u[0] == id_incendio:
-                                        row_u[1] = estado_incendio_servicio
-                                        print('Id incendio: {0}, estado : {1}, nuevo estado: {2}'.format(id_incendio, estado_incendio, estado_incendio_servicio))
-                                    cursor_update.updateRow(row_u)
-                            del cursor_update
+
+                                # Elimino el registro del incendio en la base de datos
+                                with arcpy.da.UpdateCursor(fc, ['id_incendio']) as cursor_update:
+                                    for row_u in cursor_update:
+                                        if row_u[0] == id_incendio:
+                                            cursor_update.deleteRow()
+                                del cursor_update
+
+                                # Elimino el buffer del incendio
+                                fcb = os.path.join(arcpy.env.workspace, dataset, capa_buffer_incendios_visor)
+                                with arcpy.da.UpdateCursor(fcb, ['id_incendio']) as cursor_update:
+                                    for row_u in cursor_update:
+                                        if row_u[0] == id_incendio:
+                                            cursor_update.deleteRow()    
+                                del cursor_update
+
+                                # Elimino las lineas afectadas el incendio
+                                fcl = os.path.join(arcpy.env.workspace, dataset, capa_lineas_afectadas)
+                                with arcpy.da.UpdateCursor(fcl, ['id_incendio']) as cursor_update:
+                                    for row_u in cursor_update:
+                                        if row_u[0] == id_incendio:
+                                            cursor_update.deleteRow()
+                                del cursor_update
+
+                                # Elimino los puntos afectadas el incendio
+                                fcp = os.path.join(arcpy.env.workspace, dataset, capa_puntos_afectados)
+                                with arcpy.da.UpdateCursor(fcp, ['id_incendio']) as cursor_update:
+                                    for row_u in cursor_update:
+                                        if row_u[0] == id_incendio:
+                                            cursor_update.deleteRow()
+                                del cursor_update
+                            # with arcpy.da.UpdateCursor(fc, ['id_incendio', 'estado_incendio', 'informado']) as cursor_update:
+                            #     for row_u in cursor_update:
+                            #         if row_u[0] == id_incendio:
+                            #             row_u[1] = estado_incendio_servicio
+                            #             row_u[2] = True
+                            #             print('Id incendio: {0}, estado : {1}, nuevo estado: {2}'.format(id_incendio, estado_incendio, estado_incendio_servicio))
+                            #         cursor_update.updateRow(row_u)
+                            # del cursor_update
                     # Si no existe, lo guardo
                     if existe == False:
                         incendios_nuevos += 1
@@ -244,8 +305,11 @@ def procesar_data_conaf_rest(data):
         total = {
             'actualizados': incendios_actualizados,
             'nuevos': incendios_nuevos,
-            'extinguidos': incendios_extinguidos
+            'extinguidos': incendios_extinguidos,
+            'incendios_activos': incendios_activos
         }
+
+        notifica_incencios_borrados(indendios_servicio)
 
         print('Incendios: ', total)
 
@@ -256,6 +320,60 @@ def procesar_data_conaf_rest(data):
         utils.error_log("Failed procesar_data_conaf_rest (%s)" %
                         traceback.format_exc())
 
+def notifica_incencios_borrados(incendios):
+    """Permite notificar un incendio como extinguido 
+    cuando conaf lo borra del servicio sin cambiar el estado a extinguido"""
+    try:
+        str_incendios = '\'' + '\', \''.join(incendios) + '\''
+        fc = os.path.join(arcpy.env.workspace, dataset, capa_incendios)
+        expression = """{0} NOT IN ({1})""".format(arcpy.AddFieldDelimiters(fc, 'id_incendio'), str_incendios)
+        print('incendios notifica_incencios_borrados expression: ', expression)
+        incendios_notificados = []
+        with arcpy.da.SearchCursor(fc, ["id_incendio", "fecha_inicio_incendio", "comuna_incendio"], where_clause=expression) as cursor:
+            for row in cursor:
+                print('incendio registrado y borrado de conaf:: ', row[0])
+                incendios_notificados.append(row[0])
+                utils.log("Informando incendio extingido id: {0}, comuna de {1}, fecha: {2}".format(row[0], row[2], row[1]))
+                utils.enviar_correo_admin_extinguido(row[0], row[1], row[2])
+        del cursor
+
+        # Elimino el registro del incendio en la base de datos
+        with arcpy.da.UpdateCursor(fc, ['id_incendio']) as cursor_update:
+            for row_u in cursor_update:
+                if row_u[0] in incendios_notificados:
+                    cursor_update.deleteRow()    
+        del cursor_update
+
+
+        # Elimino el buffer del incendio
+        fc = os.path.join(arcpy.env.workspace, dataset, capa_buffer_incendios_visor)
+        with arcpy.da.UpdateCursor(fc, ['id_incendio']) as cursor_update:
+            for row_u in cursor_update:
+                if row_u[0] in incendios_notificados:
+                    cursor_update.deleteRow()    
+        del cursor_update
+
+        # Elimino las lineas afectadas el incendio
+        fc = os.path.join(arcpy.env.workspace, dataset, capa_lineas_afectadas)
+        with arcpy.da.UpdateCursor(fc, ['id_incendio']) as cursor_update:
+            for row_u in cursor_update:
+                if row_u[0] in incendios_notificados:
+                    cursor_update.deleteRow()    
+        del cursor_update
+
+        # Elimino los puntos afectadas el incendio
+        fc = os.path.join(arcpy.env.workspace, dataset, capa_puntos_afectados)
+        with arcpy.da.UpdateCursor(fc, ['id_incendio']) as cursor_update:
+            for row_u in cursor_update:
+                if row_u[0] in incendios_notificados:
+                    cursor_update.deleteRow()    
+        del cursor_update
+        
+
+    except:
+        print("Failed notifica_incencios_borrados (%s)" % traceback.format_exc())
+        utils.error_log("Failed notifica_incencios_borrados (%s)" %
+                        traceback.format_exc())
 
 def procesar_data_conaf_local(data):
     """
@@ -270,6 +388,8 @@ def procesar_data_conaf_local(data):
         incendios_nuevos = 0
         incendios_actualizados = 0
         incendios_extinguidos = 0
+        incendios_activos = 0
+        indendios_servicio = []
 
         fields = [
             'id_incendio',
@@ -286,13 +406,16 @@ def procesar_data_conaf_local(data):
 
         for pm in data.iterfind('.//{0}Placemark'.format(nmsp_conaf)):
 
-            incendio = pm.find('{0}name'.format(nmsp_conaf)
-                               ).text  # Nombre del incendio
+            incendio = pm.find('{0}name'.format(nmsp_conaf)).text  # Nombre del incendio
 
-            id_incendio = pm.find(
-                '{0}ExtendedData/{0}SchemaData/{0}SimpleData'.format(nmsp_conaf)).text  # Id del incendio
+            id_incendio = pm.find('{0}ExtendedData/{0}SchemaData/{0}SimpleData'.format(nmsp_conaf)).text  # Id del incendio
+            indendios_servicio.append(id_incendio)
 
             for ls in pm.iterfind('{0}Point/{0}coordinates'.format(nmsp_conaf)):
+
+                # print('hay incendios activos en el kml de prueba -------------------------------------')
+
+                incendios_activos += 1
 
                 coordinates = ls.text.strip().replace(',0', '')
                 res = coordinates.split(',')
@@ -316,14 +439,46 @@ def procesar_data_conaf_local(data):
                             if estado_incendio_servicio == 'Extinguido':
                                 incendios_extinguidos += 1
                                 utils.enviar_correo_admin_extinguido(id_incendio, fecha_inicio_incendio, comuna)
-                            with arcpy.da.UpdateCursor(fc, ['id_incendio', 'estado_incendio']) as cursor_update:
-                                for row_u in cursor_update:
-                                    if row_u[0] == id_incendio:
-                                        row_u[1] = estado_incendio_servicio
-                                        print('Id incendio: {0}, estado : {1}, nuevo estado: {2}'.format(
-                                            id_incendio, estado_incendio, estado_incendio_servicio))
-                                    cursor_update.updateRow(row_u)
-                            del cursor_update
+                                # Elimino el registro del incendio en la base de datos
+                                with arcpy.da.UpdateCursor(fc, ['id_incendio']) as cursor_update:
+                                    for row_u in cursor_update:
+                                        if row_u[0] == id_incendio:
+                                            cursor_update.deleteRow()
+                                del cursor_update
+
+                                # Elimino el buffer del incendio
+                                fcb = os.path.join(arcpy.env.workspace, dataset, capa_buffer_incendios_visor)
+                                with arcpy.da.UpdateCursor(fcb, ['id_incendio']) as cursor_update:
+                                    for row_u in cursor_update:
+                                        if row_u[0] == id_incendio:
+                                            cursor_update.deleteRow()    
+                                del cursor_update
+
+                                # Elimino las lineas afectadas el incendio
+                                fcl = os.path.join(arcpy.env.workspace, dataset, capa_lineas_afectadas)
+                                with arcpy.da.UpdateCursor(fcl, ['id_incendio']) as cursor_update:
+                                    for row_u in cursor_update:
+                                        if row_u[0] == id_incendio:
+                                            cursor_update.deleteRow()
+                                del cursor_update
+
+                                # Elimino los puntos afectadas el incendio
+                                fcp = os.path.join(arcpy.env.workspace, dataset, capa_puntos_afectados)
+                                with arcpy.da.UpdateCursor(fcp, ['id_incendio']) as cursor_update:
+                                    for row_u in cursor_update:
+                                        if row_u[0] == id_incendio:
+                                            cursor_update.deleteRow()
+                                del cursor_update
+                            # with arcpy.da.UpdateCursor(fc, ['id_incendio', 'estado_incendio', 'informado']) as cursor_update:
+                            #     for row_u in cursor_update:
+                            #         if row_u[0] == id_incendio:
+                            #             # aca deberia eliminar el incendio, sus puntos y lineas afectadas.
+                            #             row_u[1] = estado_incendio_servicio
+                            #             row_u[2] = True
+                            #             print('Id incendio: {0}, estado : {1}, nuevo estado: {2}'.format(
+                            #                 id_incendio, estado_incendio, estado_incendio_servicio))
+                            #         cursor_update.updateRow(row_u)
+                            # del cursor_update
                     # Si no existe, lo guardo
                     if existe == False:
                         incendios_nuevos += 1
@@ -349,8 +504,11 @@ def procesar_data_conaf_local(data):
         total = {
             'actualizados': incendios_actualizados,
             'nuevos': incendios_nuevos,
-            'extinguidos': incendios_extinguidos
+            'extinguidos': incendios_extinguidos,
+            'incendios_activos': incendios_activos
         }
+
+        notifica_incencios_borrados(indendios_servicio)
 
         print('Incendios: ', total)
 
@@ -858,27 +1016,43 @@ def generar_alertas(entidades):
                 comuna_incendio = data_por_incendio[incendio]['comuna']
                 superficie = data_por_incendio[incendio]['superficie']
 
-                # Envío por cada incendio, una alerta al ministerio de energía con el resumen de todas las instalaciones afectadas
-                utils.enviar_correo_admin(
-                        id_incendio,
-                        comuna_incendio,
-                        superficie,
-                        data_por_incendio[incendio]['instalaciones']
-                    )
+                fc = os.path.join(arcpy.env.workspace, dataset, capa_incendios)
+                with arcpy.da.SearchCursor(fc, ["id_incendio", "informado"]) as cursor:
+                    for row in cursor:
+                        # Envío alertas a los incendios que no se han informado.
+                        if row[0] == id_incendio and row[1] != True:
+                            # Envío por cada incendio, una alerta al ministerio de energía con el resumen de todas las instalaciones afectadas.
+                            # aca no debo considerar los incendios ya informados.
+                            utils.enviar_correo_admin(
+                                    id_incendio,
+                                    comuna_incendio,
+                                    superficie,
+                                    data_por_incendio[incendio]['instalaciones']
+                                )
 
-                # Para el caso de las empresas, agrupo la data por email
-                data_por_correo = agrupar_por_correo(data_por_incendio[incendio]['instalaciones'])
-                if bool(data_por_correo):
-                    for correo in data_por_correo:
+                            # Para el caso de las empresas, agrupo la data por email
+                            data_por_correo = agrupar_por_correo(data_por_incendio[incendio]['instalaciones'])
+                            if bool(data_por_correo):
+                                for correo in data_por_correo:
 
-                        # Por cada correo registrado, envío una alerta con todas las instalaciones afectadas.
-                        utils.enviar_correo_empresa(
-                            correo,
-                            id_incendio,
-                            comuna_incendio,
-                            superficie,
-                            data_por_correo[correo]['instalaciones']
-                        )
+                                    # Por cada correo registrado, envío una alerta con todas las instalaciones afectadas.
+                                    utils.enviar_correo_empresa(
+                                        correo,
+                                        id_incendio,
+                                        comuna_incendio,
+                                        superficie,
+                                        data_por_correo[correo]['instalaciones']
+                                    )
+                            
+                            # Actualizo el incendio a informado.
+                            with arcpy.da.UpdateCursor(fc, ['id_incendio', 'informado']) as cursor_update:
+                                for row_u in cursor_update:
+                                    if row_u[0] == id_incendio:
+                                        row_u[1] = True
+                                    cursor_update.updateRow(row_u)
+                            del cursor_update
+                del cursor
+
 
     except:
         print("Failed generar_alertas (%s)" %

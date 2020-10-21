@@ -48,7 +48,6 @@ def test_mail():
         email.send(destinatario_admin, message)
         utils.log("Fin test mail\n")
         print("Fin test mail\n")
-        return 2/0
     except:
         print("Failed test_mail (%s)" %
               traceback.format_exc())

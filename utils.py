@@ -137,7 +137,7 @@ def delete_temp_tables():
 
         for table in tables:
             name = table.split(USER_DATOS)
-            print('name: ', name)
+            # print('name: ', name)
             t = "cruce_" + name[1]
             # t = 'cruce_' + table
             # fc = os.path.join(arcpy.env.workspace, t)
