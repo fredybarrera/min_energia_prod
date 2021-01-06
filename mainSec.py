@@ -69,26 +69,34 @@ def main():
     data = obtener_clientes_afectados(url_api_sec)
     utils.log("Obteniendo clientes afectados")
 
-    # Limpio la data de la tabla local y del servicio
-    arcpy.AddMessage("Limpiando resultados anteriores... ")
-    limpiar_data_local()
-    utils.log("Limpiando resultados anteriores")
+    if len(data) > 0:
+        # Limpio la data de la tabla local y del servicio
+        arcpy.AddMessage("Limpiando resultados anteriores... ")
+        limpiar_data_local()
+        utils.log("Limpiando resultados anteriores")
 
-    # Actualizo los clientes afectados
-    arcpy.AddMessage("Actualizando clientes afectados... ")
-    clientes_afectados = actualizar_clientes_afectados_local(data)
-    utils.log("Actualizando clientes afectados")
+        # Actualizo los clientes afectados
+        arcpy.AddMessage("Actualizando clientes afectados... ")
+        clientes_afectados = actualizar_clientes_afectados_local(data)
+        arcpy.AddMessage("clientes_afectados " + str(clientes_afectados))
+        utils.log("Actualizando clientes afectados")
+
+    else:
+        arcpy.AddMessage("No se pudo obtener los clientes afectados... ")
+        utils.log("No se pudo obtener los clientes afectados")
+
 
     timeEnd = time.time()
     timeElapsed = timeEnd - timeStart
     arcpy.AddMessage("Proceso SEC finalizado... " + str(datetime.now()))
     arcpy.AddMessage("Tiempo de ejecución: " +
-                     str(utils.convert_seconds(timeElapsed)))
+                    str(utils.convert_seconds(timeElapsed)))
     arcpy.AddMessage("Se registraron " + str(clientes_afectados) + ' afectados')
     utils.log("Se registraron " + str(clientes_afectados) + " afectados")
     utils.log("Tiempo de ejecución: " +
-              str(utils.convert_seconds(timeElapsed)))
+            str(utils.convert_seconds(timeElapsed)))
     utils.log("Proceso SEC finalizado \n")
+
 
 
 def obtener_clientes_afectados(url):
@@ -116,6 +124,7 @@ def obtener_clientes_afectados(url):
               traceback.format_exc())
         utils.error_log("Failed obtener_clientes_afectados (%s)" %
                         traceback.format_exc())
+        utils.log("No se pudo obtener el listado de clientes afectados, respuesta del servicio: " + str(response))
 
 
 def actualizar_clientes_afectados_local(clientes_afectados):

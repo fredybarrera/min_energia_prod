@@ -9,7 +9,7 @@
 #-------------------------------------------------------------------------------
 
 
-def get_template_empresa(instalaciones):
+def get_template_empresa(instalaciones, nombre_incendio):
     return """\
         <html>
         <body>
@@ -23,29 +23,29 @@ def get_template_empresa(instalaciones):
     """.format(instalaciones=instalaciones)
 
 
-def get_template_admin(id_incendio, comuna_incendio, superficie, instalaciones):
+def get_template_admin(id_incendio, comuna_incendio, superficie, instalaciones, nombre_incendio):
     return """\
         <html>
         <body>
             <p>Estimados(as): </p>
-            <p>Se informa que el incendio <b>{id_incendio}</b>, ubicado en la comuna de <b>{comuna_incendio}</b>, ha consumido hasta el momento una superficie de <b>{superficie}</b>.</p>
+            <p>Se informa que el incendio <b>{nombre_incendio}</b>, ubicado en la comuna de <b>{comuna_incendio}</b>, ha consumido hasta el momento una superficie de <b>{superficie}</b>.</p>
             <p>Instalaciones próximas al incendio:</p>
             <p>{instalaciones}</p>
             <p><a href="#" target="_blank"></a></p>
             <p style="font-style: italic; font-size: 8px;"></p>
         </body>
         </html>
-    """.format(id_incendio=id_incendio, comuna_incendio=comuna_incendio, superficie=superficie, instalaciones=instalaciones)
+    """.format(nombre_incendio=nombre_incendio, comuna_incendio=comuna_incendio, superficie=superficie, instalaciones=instalaciones)
 
 
-def get_template_admin_extinguido(id_incendio, comuna_incendio, fecha_inicio_incendio):
+def get_template_admin_extinguido(id_incendio, comuna_incendio, fecha_inicio_incendio, nombre_incendio):
     return """\
         <html>
         <body>
             <p>Estimados(as): </p>
-            <p>Se informa que el incendio <b>{id_incendio}</b>, iniciado el dia <b>{fecha_inicio_incendio}</b>, ubicado en la comuna de <b>{comuna_incendio}</b>, ha sido actualizado a <b>Extinguido</b>.</p>
+            <p>Se informa que el incendio <b>{nombre_incendio}</b>, iniciado el dia <b>{fecha_inicio_incendio}</b>, ubicado en la comuna de <b>{comuna_incendio}</b>, ha sido actualizado a <b>Controlado/Extinguido</b>.</p>
             <p><a href="#" target="_blank"></a></p>
             <p style="font-style: italic; font-size: 8px;"></p>
         </body>
         </html>
-    """.format(id_incendio=id_incendio, fecha_inicio_incendio=fecha_inicio_incendio, comuna_incendio=comuna_incendio)
+    """.format(nombre_incendio=nombre_incendio, fecha_inicio_incendio=fecha_inicio_incendio, comuna_incendio=comuna_incendio)

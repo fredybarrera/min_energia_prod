@@ -32,7 +32,7 @@ enviar_mail = config('EMAIL_SEND')
 
 
 # Envio alerta de email a la empresa responsable de la instalación
-def enviar_email_empresa(destinatario, subject, texto_instalaciones):
+def enviar_email_empresa(destinatario, subject, texto_instalaciones, nombre_incendio):
     try:
         # Construyo los encabezados
         message = MIMEMultipart("alternative")
@@ -42,7 +42,7 @@ def enviar_email_empresa(destinatario, subject, texto_instalaciones):
 
         # Construyo el cuerpo del correo en HTML
         # Obtengo el template para el envío de correo a una empresa
-        html = template.get_template_empresa(texto_instalaciones)
+        html = template.get_template_empresa(texto_instalaciones, nombre_incendio)
         part = MIMEText(html, "html")
         message.attach(part)
 
@@ -56,7 +56,7 @@ def enviar_email_empresa(destinatario, subject, texto_instalaciones):
 
 
 # Envío alerta de correo con el resumen del incendio al administrador del sistema
-def enviar_email_admin(id_incendio, comuna_incendio, superficie, subject, texto_instalaciones):
+def enviar_email_admin(id_incendio, comuna_incendio, superficie, subject, texto_instalaciones, nombre_incendio):
     try:
         # Construyo los encabezados
         message = MIMEMultipart("alternative")
@@ -66,7 +66,7 @@ def enviar_email_admin(id_incendio, comuna_incendio, superficie, subject, texto_
 
         # Construyo el cuerpo del correo en HTML
         # Obtengo el template para el envío de correo a una empresa
-        html = template.get_template_admin(id_incendio, comuna_incendio, superficie, texto_instalaciones)
+        html = template.get_template_admin(id_incendio, comuna_incendio, superficie, texto_instalaciones, nombre_incendio)
         part = MIMEText(html, "html")
         message.attach(part)
 
@@ -80,7 +80,7 @@ def enviar_email_admin(id_incendio, comuna_incendio, superficie, subject, texto_
 
 
 # Envío alerta de correo al administrador del sistema informado que el incendio está extinguido.
-def enviar_email_admin_extinguido(id_incendio, comuna_incendio, subject, fecha_inicio_incendio):
+def enviar_email_admin_extinguido(id_incendio, comuna_incendio, subject, fecha_inicio_incendio, nombre_incendio):
     try:
         # Construyo los encabezados
         message = MIMEMultipart("alternative")
@@ -90,7 +90,7 @@ def enviar_email_admin_extinguido(id_incendio, comuna_incendio, subject, fecha_i
 
         # Construyo el cuerpo del correo en HTML
         # Obtengo el template para el envío de correo a una empresa
-        html = template.get_template_admin_extinguido(id_incendio, comuna_incendio, fecha_inicio_incendio)
+        html = template.get_template_admin_extinguido(id_incendio, comuna_incendio, fecha_inicio_incendio, nombre_incendio)
         part = MIMEText(html, "html")
         message.attach(part)
 

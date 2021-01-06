@@ -40,7 +40,7 @@ def test_mail():
 
         # Construyo el cuerpo del correo en HTML
         # Obtengo el template para el envío de correo a una empresa
-        html = template.get_template_empresa('<b>Texto de prueba...</b>')
+        html = template.get_template_empresa('<b>Texto de prueba...</b>', 'test')
         part = MIMEText(html, "html")
         message.attach(part)
 

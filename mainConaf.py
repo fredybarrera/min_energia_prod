@@ -163,11 +163,11 @@ def informar_incendios_extinguidos():
     try:
         arcpy.AddMessage("Enviando alerta de incendio extinguido...")
         fc = os.path.join(arcpy.env.workspace, dataset, capa_incendios)
-        with arcpy.da.SearchCursor(fc, ["id_incendio", "fecha_inicio_incendio", "comuna_incendio"]) as cursor:
+        with arcpy.da.SearchCursor(fc, ["id_incendio", "fecha_inicio_incendio", "comuna_incendio", "nombre_incendio"]) as cursor:
             for row in cursor:
                 # Envío la alerta
                 utils.log("Informando incendio extingido id: {0}, comuna de {1}, fecha: {3}".format(row[0], row[2], row[1]))
-                utils.enviar_correo_admin_extinguido(row[0], row[1], row[2])
+                utils.enviar_correo_admin_extinguido(row[0], row[1], row[2], row[3])
         del cursor
 
     except:
@@ -233,6 +233,7 @@ def procesar_data_conaf_rest(data):
                     # Si existe el incendio, valido el estado
                     for row in cursor:
                         existe = True
+                        nombre_incendio = row[1]
                         estado_incendio = row[2]
                         # Si cambia el estado del incencio, lo actualizo
                         if estado_incendio != estado_incendio_servicio:
@@ -240,7 +241,7 @@ def procesar_data_conaf_rest(data):
                             # Si el incendio se encuentra extinguido, genero la alerta informando
                             if estado_incendio_servicio == 'Extinguido':
                                 incendios_extinguidos += 1
-                                utils.enviar_correo_admin_extinguido(id_incendio, fecha_inicio_incendio, comuna)
+                                utils.enviar_correo_admin_extinguido(id_incendio, fecha_inicio_incendio, comuna, nombre_incendio)
 
                                 # Elimino el registro del incendio en la base de datos
                                 with arcpy.da.UpdateCursor(fc, ['id_incendio']) as cursor_update:
@@ -329,12 +330,12 @@ def notifica_incencios_borrados(incendios):
         expression = """{0} NOT IN ({1})""".format(arcpy.AddFieldDelimiters(fc, 'id_incendio'), str_incendios)
         print('incendios notifica_incencios_borrados expression: ', expression)
         incendios_notificados = []
-        with arcpy.da.SearchCursor(fc, ["id_incendio", "fecha_inicio_incendio", "comuna_incendio"], where_clause=expression) as cursor:
+        with arcpy.da.SearchCursor(fc, ["id_incendio", "fecha_inicio_incendio", "comuna_incendio", "nombre_incendio"], where_clause=expression) as cursor:
             for row in cursor:
                 print('incendio registrado y borrado de conaf:: ', row[0])
                 incendios_notificados.append(row[0])
                 utils.log("Informando incendio extingido id: {0}, comuna de {1}, fecha: {2}".format(row[0], row[2], row[1]))
-                utils.enviar_correo_admin_extinguido(row[0], row[1], row[2])
+                utils.enviar_correo_admin_extinguido(row[0], row[1], row[2], row[3])
         del cursor
 
         # Elimino el registro del incendio en la base de datos
@@ -431,6 +432,7 @@ def procesar_data_conaf_local(data):
                     # Si existe el incendio, valido el estado
                     for row in cursor:
                         existe = True
+                        nombre_incendio = row[1]
                         estado_incendio = row[2]
                         # Si cambia el estado del incencio, lo actualizo
                         if estado_incendio != estado_incendio_servicio:
@@ -438,7 +440,7 @@ def procesar_data_conaf_local(data):
                             # Si el incendio se encuentra extinguido, genero la alerta informando
                             if estado_incendio_servicio == 'Extinguido':
                                 incendios_extinguidos += 1
-                                utils.enviar_correo_admin_extinguido(id_incendio, fecha_inicio_incendio, comuna)
+                                utils.enviar_correo_admin_extinguido(id_incendio, fecha_inicio_incendio, comuna, nombre_incendio)
                                 # Elimino el registro del incendio en la base de datos
                                 with arcpy.da.UpdateCursor(fc, ['id_incendio']) as cursor_update:
                                     for row_u in cursor_update:
@@ -532,7 +534,7 @@ def crear_buffer(capa_incendios):
         roads = os.path.join(arcpy.env.workspace, dataset, capa_incendios)
         # print('roadsBuffer: ', roadsBuffer)
         # print('roads: ', roads)
-        distanceField = "5 Kilometers"
+        distanceField = "2 Kilometers"
         arcpy.Buffer_analysis(roads, roadsBuffer, distanceField)
     
     except:
@@ -1017,17 +1019,19 @@ def generar_alertas(entidades):
                 superficie = data_por_incendio[incendio]['superficie']
 
                 fc = os.path.join(arcpy.env.workspace, dataset, capa_incendios)
-                with arcpy.da.SearchCursor(fc, ["id_incendio", "informado"]) as cursor:
+                with arcpy.da.SearchCursor(fc, ["id_incendio", "informado", "nombre_incendio"]) as cursor:
                     for row in cursor:
                         # Envío alertas a los incendios que no se han informado.
                         if row[0] == id_incendio and row[1] != True:
+                            nombre_incendio = row[2]
                             # Envío por cada incendio, una alerta al ministerio de energía con el resumen de todas las instalaciones afectadas.
                             # aca no debo considerar los incendios ya informados.
                             utils.enviar_correo_admin(
                                     id_incendio,
                                     comuna_incendio,
                                     superficie,
-                                    data_por_incendio[incendio]['instalaciones']
+                                    data_por_incendio[incendio]['instalaciones'],
+                                    nombre_incendio
                                 )
 
                             # Para el caso de las empresas, agrupo la data por email
@@ -1041,7 +1045,8 @@ def generar_alertas(entidades):
                                         id_incendio,
                                         comuna_incendio,
                                         superficie,
-                                        data_por_correo[correo]['instalaciones']
+                                        data_por_correo[correo]['instalaciones'],
+                                        nombre_incendio
                                     )
                             
                             # Actualizo el incendio a informado.

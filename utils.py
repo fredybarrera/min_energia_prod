@@ -47,7 +47,7 @@ def get_data_kml(url):
     except:
         print("Failed get_data_kml (%s)" %
               traceback.format_exc())
-        utils.error_log("Failed get_data_kml (%s)" %
+        error_log("Failed get_data_kml (%s)" %
                         traceback.format_exc())
 
 
@@ -62,7 +62,7 @@ def post_request_json_raw_data(url, raw_data):
     except:
         print("Failed post_request_payload (%s)" %
               traceback.format_exc())
-        utils.error_log("Failed post_request_payload (%s)" %
+        error_log("Failed post_request_payload (%s)" %
                         traceback.format_exc())
 
 
@@ -98,7 +98,7 @@ def get_data_iframe(id_incendio):
 
     except:
         print("Failed get_data_iframe (%s)" % traceback.format_exc())
-        utils.error_log("Failed get_data_iframe (%s)" %
+        error_log("Failed get_data_iframe (%s)" %
                         traceback.format_exc())
 
 
@@ -107,7 +107,7 @@ def get_data_iframe_aux(id_incendio):
     se usa para cargar un kml local que tiene información desactualizada.
     """
 
-    return ['31-may-2020 16:27', 'Valparaíso', '10 ha', 'En Combate']
+    return ['31-may-2020 16:27', 'Valparaíso', '10 ha', 'Extinguido']
 
 
 def truncar_data_dataset(table):
@@ -126,7 +126,7 @@ def truncar_data_dataset(table):
 
     except:
         print("Failed truncar_data_dataset (%s)" % traceback.format_exc())
-        utils.error_log("Failed truncar_data_dataset (%s)" %
+        error_log("Failed truncar_data_dataset (%s)" %
                         traceback.format_exc())
 
 
@@ -157,14 +157,14 @@ def delete_temp_tables():
                 
     except:
         print("Failed delete_temp_tables (%s)" % traceback.format_exc())
-        utils.error_log("Failed delete_temp_tables (%s)" %
+        error_log("Failed delete_temp_tables (%s)" %
                         traceback.format_exc())
 
 
-def enviar_correo_empresa(destinatario, id_incendio, comuna_incendio, superficie, instalaciones):
+def enviar_correo_empresa(destinatario, id_incendio, comuna_incendio, superficie, instalaciones, nombre_incendio):
     """Envía correo electrónico a la empresa afectada."""
     try:
-        hora_reporte = str(datetime.now())
+        hora_reporte = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         texto_instalaciones = '<table><thead style="background-color:#215868;color:white"><tr>'
         texto_instalaciones += '<td>Fecha y hora</td>'
         texto_instalaciones += '<td>Número/Nombre Incendio</td>'
@@ -192,20 +192,20 @@ def enviar_correo_empresa(destinatario, id_incendio, comuna_incendio, superficie
         texto_instalaciones += '</tbody>'
         texto_instalaciones += '</table>'
 
-        subject = "[Empresa] - Incendio N° " + id_incendio + ", comuna de " + comuna_incendio
+        subject = "[Empresa] - Incendio " + nombre_incendio + ", " + comuna_incendio
 
-        email.enviar_email_empresa(destinatario, subject, texto_instalaciones)
+        email.enviar_email_empresa(destinatario, subject, texto_instalaciones, nombre_incendio)
 
     except:
         print("Failed enviar_correo_empresa (%s)" % traceback.format_exc())
-        utils.error_log("Failed enviar_correo_empresa (%s)" %
+        error_log("Failed enviar_correo_empresa (%s)" %
                         traceback.format_exc())
 
 
-def enviar_correo_admin(id_incendio, comuna_incendio, superficie, instalaciones):
+def enviar_correo_admin(id_incendio, comuna_incendio, superficie, instalaciones, nombre_incendio):
     """Envía correo electrónico al ministerio de energía."""
     try:
-        hora_reporte = str(datetime.now())
+        hora_reporte = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         texto_instalaciones = '<table><thead style="background-color:#215868;color:white"><tr>'
         texto_instalaciones += '<td>Fecha y hora</td>'
         texto_instalaciones += '<td>Número/Nombre Incendio</td>'
@@ -233,36 +233,38 @@ def enviar_correo_admin(id_incendio, comuna_incendio, superficie, instalaciones)
         texto_instalaciones += '</tbody>'
         texto_instalaciones += '</table>'
 
-        subject = "[Admin] - Incendio N° " + id_incendio + ", comuna de " + comuna_incendio
+        subject = "[Admin] - Incendio " + nombre_incendio + ", " + comuna_incendio
 
         email.enviar_email_admin(
             id_incendio, 
             comuna_incendio, 
             superficie, 
             subject, 
-            texto_instalaciones)
+            texto_instalaciones,
+            nombre_incendio)
 
     except:
         print("Failed enviar_correo_admin (%s)" % traceback.format_exc())
-        utils.error_log("Failed enviar_correo_admin (%s)" %
+        error_log("Failed enviar_correo_admin (%s)" %
                         traceback.format_exc())
 
 
-def enviar_correo_admin_extinguido(id_incendio, fecha_inicio_incendio, comuna_incendio):
+def enviar_correo_admin_extinguido(id_incendio, fecha_inicio_incendio, comuna_incendio, nombre_incendio):
     """Envía correo electrónico informando que el incendio se ha extinguido."""
     try:
 
-        subject = "[Extinguido] - Incendio N° " + id_incendio + " extinguido"
+        subject = "[Controlado/Extinguido] - Incendio " + nombre_incendio + ", " + comuna_incendio
 
         email.enviar_email_admin_extinguido(
             id_incendio,
             comuna_incendio,
             subject,
-            fecha_inicio_incendio)
+            fecha_inicio_incendio,
+            nombre_incendio)
 
     except:
         print("Failed enviar_correo_admin_extinguido (%s)" % traceback.format_exc())
-        utils.error_log("Failed enviar_correo_admin_extinguido (%s)" %
+        error_log("Failed enviar_correo_admin_extinguido (%s)" %
                         traceback.format_exc())
 
 
@@ -333,7 +335,7 @@ def actualizar_agromet():
 
     except:
         print("Failed actualizar_agromet (%s)" % traceback.format_exc())
-        utils.error_log("Failed actualizar_agromet (%s)" %
+        error_log("Failed actualizar_agromet (%s)" %
                         traceback.format_exc())
 
 
@@ -348,7 +350,7 @@ def log(text):
     except:
         print("Failed log (%s)" %
               traceback.format_exc())
-        utils.error_log("Failed send (%s)" %
+        error_log("Failed send (%s)" %
                         traceback.format_exc())
 
 

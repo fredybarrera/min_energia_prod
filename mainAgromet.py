@@ -104,16 +104,17 @@ def obtener_variables_agromet(url_agromet, userkey_agromet):
         muestras = get_muestras(estaciones, fecha_hoy, hhmm)
         
         # Por cada estacion, actualizo el valor de la direccion del viento 'direccion_viento' y la fecha de actualizacion 'fecha_actualizacion'
-        with arcpy.da.UpdateCursor(fc, ['id', 'direccion_viento', 'humedad_media', 'temperatura_media', 'velocidad_viento_max', 'velocidad_viento_media', 'fecha_actualizacion']) as cursor:
+        with arcpy.da.UpdateCursor(fc, ['id', 'direccion_viento', 'fecha_actualizacion']) as cursor:
+        # with arcpy.da.UpdateCursor(fc, ['id', 'direccion_viento', 'humedad_media', 'temperatura_media', 'velocidad_viento_max', 'velocidad_viento_media', 'fecha_actualizacion']) as cursor:
             for row in cursor:
                 for k in muestras:
                     if row[0] == k['id_estacion']:
                         row[1] = k['direccion_viento']
-                        row[2] = k['humedad_media']
-                        row[3] = k['temperatura_media']
-                        row[4] = k['velocidad_viento_max']
-                        row[5] = k['velocidad_viento_media']
-                        row[6] = ahora
+                        # row[2] = k['humedad_media']
+                        # row[3] = k['temperatura_media']
+                        # row[4] = k['velocidad_viento_max']
+                        # row[5] = k['velocidad_viento_media']
+                        row[2] = ahora
                         print('Estacion: {0}, direccion viento: {1}'.format(
                             k['id_estacion'], k['direccion_viento']))
                         cursor.updateRow(row)
@@ -135,18 +136,18 @@ def get_muestras(estaciones, fecha_hoy, hhmm):
         for estacion in estaciones:
             print('Consultando estacion: {0}, {1}'.format(estacion['nombre'], estacion['comuna']))
             direccion_viento = get_data_variable(estacion['id_direccion_viento'], fecha_hoy, hhmm)
-            humedad_media = get_data_variable(estacion['id_humedad_media'], fecha_hoy, hhmm)
-            temperatura_media = get_data_variable(estacion['id_temperatura_media'], fecha_hoy, hhmm)
-            velocidad_viento_max = get_data_variable(estacion['id_velocidad_viento_max'], fecha_hoy, hhmm)
-            velocidad_viento_media = get_data_variable(estacion['id_velocidad_viento_media'], fecha_hoy, hhmm)
+            # humedad_media = get_data_variable(estacion['id_humedad_media'], fecha_hoy, hhmm)
+            # temperatura_media = get_data_variable(estacion['id_temperatura_media'], fecha_hoy, hhmm)
+            # velocidad_viento_max = get_data_variable(estacion['id_velocidad_viento_max'], fecha_hoy, hhmm)
+            # velocidad_viento_media = get_data_variable(estacion['id_velocidad_viento_media'], fecha_hoy, hhmm)
 
             muestras.append({
                 "id_estacion": int(estacion['id_estacion']),
-                "direccion_viento": float(direccion_viento),
-                "humedad_media": float(humedad_media),
-                "temperatura_media": float(temperatura_media),
-                "velocidad_viento_max": float(velocidad_viento_max),
-                "velocidad_viento_media": float(velocidad_viento_media)
+                "direccion_viento": float(direccion_viento)
+                # "humedad_media": float(humedad_media),
+                # "temperatura_media": float(temperatura_media),
+                # "velocidad_viento_max": float(velocidad_viento_max),
+                # "velocidad_viento_media": float(velocidad_viento_media)
             })
 
         return muestras
